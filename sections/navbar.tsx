@@ -1,18 +1,26 @@
-import { Github } from "@hugeicons/core-free-icons"
+import { GithubIcon } from "@hugeicons/core-free-icons"
 import Link from "next/link"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 
-const links = [
+type NavLink = {
+  label: string
+  href: string
+  external?: boolean
+}
+
+const links: NavLink[] = [
   { label: "Home", href: "/" },
   {
     label: "Component",
     href: "https://dock.cool",
+    external: true,
   },
   {
     label: "Block",
     href: "https://dock.cool",
+    external: true,
   },
 
   { label: "Pricing", href: "#pricing" },
@@ -91,7 +99,7 @@ export default function Navbar() {
             </div>
 
             <Button variant="secondary">
-              <HugeiconsIcon icon={Github} className="h-4 w-4" />
+              <HugeiconsIcon icon={GithubIcon} className="h-4 w-4" />
               <span>Github</span>
             </Button>
           </div>
