@@ -2,13 +2,13 @@
 
 A modern, animated UI for Supaste — a clipboard and screenshot history app for macOS.
 
-Built with Next.js 16, React 19, Tailwind CSS 4, and shadcn/ui (base-rhea style) with the Hugeicons icon library.
+Built with Next.js 16, React 19, Tailwind CSS 4, and shadcn/ui (base-rhea style) with the lucide-react icon library.
 
 ## Stack
 
 - **Framework:** [Next.js](https://nextjs.org) 16 (App Router, Turbopack)
 - **UI:** [React](https://react.dev) 19, [Tailwind CSS](https://tailwindcss.com) 4, [shadcn/ui](https://ui.shadcn.com)
-- **Icons:** [Hugeicons](https://hugeicons.com) (`@hugeicons/core-free-icons`, `@hugeicons/react`)
+- **Icons:** [lucide-react](https://lucide.dev) (`lucide-react`)
 - **Theming:** `next-themes`
 - **Package manager:** [bun](https://bun.sh)
 
@@ -46,7 +46,7 @@ sections/               # Page-level section components (hero, navbar, …)
 
 ## Adding UI components
 
-This project uses shadcn/ui with the `hugeicons` icon library:
+This project uses shadcn/ui with the `lucide` icon library:
 
 ```bash
 npx shadcn@latest add <component>
