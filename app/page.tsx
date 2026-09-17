@@ -1,11 +1,13 @@
 import HeroSection from "@/sections/hero"
 import Navbar from "@/sections/navbar"
+import ShowcaseSection from "@/sections/showcase"
 
 export default function Page() {
   return (
     <div>
       <Navbar />
       <HeroSection />
+      <ShowcaseSection />
     </div>
   )
 }

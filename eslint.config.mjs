@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Copied as-is from sahilcodex portfolio — not edited in this project.
+    "components/showcase/**",
   ]),
 ]);
 
