@@ -1,6 +1,5 @@
-import { GithubIcon } from "@hugeicons/core-free-icons"
+import { GithubIcon } from "@/components/brand-icons"
 import Link from "next/link"
-import { HugeiconsIcon } from "@hugeicons/react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 
@@ -14,12 +13,12 @@ const links: NavLink[] = [
   { label: "Home", href: "/" },
   {
     label: "Component",
-    href: "https://dock.cool",
+    href: "/components",
     external: true,
   },
   {
     label: "Block",
-    href: "https://dock.cool",
+    href: "/blocks",
     external: true,
   },
 
@@ -99,7 +98,7 @@ export default function Navbar() {
             </div>
 
             <Button variant="secondary">
-              <HugeiconsIcon icon={GithubIcon} className="h-4 w-4" />
+              <GithubIcon className="h-4 w-4" />
               <span>Github</span>
             </Button>
           </div>
