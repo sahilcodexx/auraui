@@ -126,3 +126,51 @@
     @apply font-sans;
   }
 }
+
+@layer utilities {
+  /* Soft fade at the top/bottom of a scrollable region — matches the
+     reference `craft/src/app/globals.css`. Gradient is masked by the same
+     3rem stops on both ends so at rest the list sits fully inside the
+     opaque zone. */
+  .fade-mask-y {
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 3rem,
+      black calc(100% - 3rem),
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 3rem,
+      black calc(100% - 3rem),
+      transparent
+    );
+  }
+
+  /* Hide native scrollbar styling — used by the sidebar nav so the
+     fade-mask-y can take over edge treatment. */
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Active-dot colour sweep. Plays once per mount, crossfading the section
+     colour set on `--dot-from` into the section colour set on `--dot-to`.
+     Timed from the same `DOT_IMPACT_MS` used by the layout spring. */
+  @keyframes dot-crossfade {
+    from {
+      background-color: var(--dot-from, var(--foreground));
+    }
+    to {
+      background-color: var(--dot-to, var(--foreground));
+    }
+  }
+  .dot-crossfade {
+    animation: dot-crossfade var(--dot-flight, 350ms) ease-out forwards;
+  }
+}
