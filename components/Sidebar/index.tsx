@@ -1,44 +1,53 @@
 "use client"
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-
 import { COMPONENTS } from "@/lib/docs-registry"
-import { cn } from "@/lib/utils"
+import type { NavConcept, NavSection, Section } from "@/lib/sections"
+import { SidebarNav } from "./sidebar-nav"
+
+// Order in which sections appear in the sidebar. Matches the sidebar
+// sections list in `docs-registry.ts`.
+const SECTION_ORDER: Section[] = [
+  "Display",
+  "AI Kit",
+  "Inputs",
+  "Navigation",
+]
+
+// Build the `NavSection[]` shape that SidebarNav expects from our docs
+// registry. One section per category that has at least one item, in the
+// order defined above. Items keep their registry order (no extra sort).
+function buildSections(): NavSection[] {
+  const byCategory = new Map<Section, NavConcept[]>()
+  for (const s of SECTION_ORDER) byCategory.set(s, [])
+  for (const item of COMPONENTS) {
+    byCategory.get(item.category as Section)?.push({
+      title: item.title,
+      slug: item.slug,
+      section: item.category as Section,
+      order: 0,
+    })
+  }
+  return SECTION_ORDER.flatMap((section) => {
+    const concepts = byCategory.get(section) ?? []
+    if (concepts.length === 0) return []
+    return [{ section, concepts }]
+  })
+}
 
 export default function Sidebar() {
-  const pathname = usePathname()
+  const sections = buildSections()
 
   return (
     <aside className="flex h-full w-full flex-col bg-transparent">
-      {/* Brand — icon only */}
-      <div className="flex items-center gap-2 px-4 pt-4 pb-4">
-        <div className="flex size-6 items-center justify-center rounded-md bg-foreground font-mono text-xs font-bold text-background">
-          m
-        </div>
+      {/* Wordmark — matches craft's "Craft" heading at the top of the nav. */}
+      <div className="px-6 pt-6 pb-4">
+        <span className="text-[15px] font-semibold tracking-tight text-foreground">
+          Components
+        </span>
       </div>
 
-      {/* Components list — names only (no header, no badges) */}
-      <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto px-2">
-        {COMPONENTS.map((item) => {
-          const href = `/components/${item.slug}`
-          const isActive = pathname === href
-          return (
-            <Link
-              key={item.slug}
-              href={href}
-              className={cn(
-                "rounded-lg px-2.5 py-1.5 text-sm transition-colors",
-                isActive
-                  ? "bg-foreground/8 text-foreground"
-                  : "text-foreground/60 hover:bg-foreground/5 hover:text-foreground"
-              )}
-            >
-              <span className="truncate">{item.title}</span>
-            </Link>
-          )
-        })}
-      </nav>
+      {/* Nav */}
+      <SidebarNav sections={sections} className="flex-1" />
     </aside>
   )
 }
